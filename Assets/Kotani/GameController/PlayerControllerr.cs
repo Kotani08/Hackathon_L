@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.InputSystem;
+using UnityEngine.InputSystem;
 
 public class PlayerControllerr : MonoBehaviour
 {
@@ -27,7 +27,11 @@ private Rigidbody2D player;
 	    movingDirecion.Normalize();
 	    movingVelocity = movingDirecion * speed;
       if (Input.GetKeyDown(KeyCode.Space)) {Jump();}
-      //if (Gamepad.current.buttonSouth.wasPressedThisFrame){Jump();}
+      if (Gamepad.current != null)
+      {
+        if (Gamepad.current.buttonSouth.wasPressedThisFrame){Jump();}
+      }
+       
       player.velocity = new Vector2(movingVelocity.x, player.velocity.y);
       #endregion
     }
