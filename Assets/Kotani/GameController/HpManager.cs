@@ -6,19 +6,40 @@ using UnityEngine.UI;
 public class HpManager : MonoBehaviour
 {
     [SerializeField]
-    private PlayerStatus playerStatus;
+    private Player playerStatus;
     [SerializeField]
-    private Text Hptext;
+    private List<GameObject> HpSprite = new List<GameObject>();
     void Update()
     {
-        if(playerStatus.GetHp()<=0)
-        {
-            playerStatus.SetHp(0);
-        }
-        Hptext.text = "HP:" + playerStatus.GetHp().ToString()+"/100";
+        HpDisp();
     }
-    public void PlayerHpDown(int value)
+    /*public void PlayerHpDown(int value)
     {
-        playerStatus.SetHp(playerStatus.GetHp() - value);
+        playerStatus.playerHP - value;
+        HpDisp();
+    }*/
+    public void HpDisp()
+    {
+        int a = playerStatus.playerHP;
+        for(;a >=1;a--)
+        {
+            #region 悪い書き方なので隠します
+            //
+            if(a>=5)
+            {
+                HpSprite[0].SetActive(true);
+                HpSprite[1].SetActive(true);
+                HpSprite[2].SetActive(true);
+                HpSprite[3].SetActive(true);
+                HpSprite[4].SetActive(true);
+                break;
+            }
+            #endregion
+
+            if(HpSprite[a].activeSelf == false)
+            {
+            HpSprite[a].SetActive(true);
+            }
+        }
     }
 }
