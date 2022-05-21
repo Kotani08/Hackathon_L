@@ -15,7 +15,6 @@ public class PopGrass : MonoBehaviour
     {
         if(collider.tag == "Player")
         {
-        Debug.Log("通過");
         a.gameObject.SetActive(true);
         }
     }

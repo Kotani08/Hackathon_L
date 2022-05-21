@@ -16,6 +16,8 @@ public int jumpmax=2;
 // PlayerのRigidbody取得
 [SerializeField]
 private Rigidbody2D player;
+[SerializeField]
+private MagnetTypeDisplay magnetSystem;
 
     #region 移動関連
     public void Playerwalk()
@@ -27,9 +29,11 @@ private Rigidbody2D player;
 	    movingDirecion.Normalize();
 	    movingVelocity = movingDirecion * speed;
       if (Input.GetKeyDown(KeyCode.Space)) {Jump();}
+      if (Input.GetKeyDown(KeyCode.Z)) {magnetSystem.MagTypeDisp();}
       if (Gamepad.current != null)
       {
         if (Gamepad.current.buttonSouth.wasPressedThisFrame){Jump();}
+        if(Gamepad.current.buttonEast.wasPressedThisFrame){magnetSystem.MagTypeDisp();}
       }
        
       player.velocity = new Vector2(movingVelocity.x, player.velocity.y);

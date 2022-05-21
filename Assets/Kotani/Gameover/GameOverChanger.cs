@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class GameOverChanger : MonoBehaviour
 {
     [SerializeField]
-    private PlayerStatus playerStatus;
+    private Player playerStatus;
     [SerializeField]
     private GameObject player;
     private Vector3 ResetVec;
@@ -21,7 +22,7 @@ public class GameOverChanger : MonoBehaviour
     }
     void Update()
     {
-        if(playerStatus.GetHp() <= 0)
+        if(playerStatus.playerHP <= 0)
         {
             GameOver();
         }
@@ -36,9 +37,10 @@ public class GameOverChanger : MonoBehaviour
         {
             Retry();
         }
+        if (Gamepad.current != null){if(Gamepad.current.rightShoulder.wasPressedThisFrame){Retry();}}
         if(Input.GetKeyDown(KeyCode.X))
         {
-            playerStatus.SetHp(playerStatus.GetHp()-10);
+            playerStatus.playerHP-=10;
         }
     }
     #region ちっちゃいやつ
@@ -62,13 +64,13 @@ public class GameOverChanger : MonoBehaviour
         gameOverPanel.transform.Find("Text").gameObject.GetComponent<Text>().text ="ゲームクリア";
         }
     }
-    private void Retry()
+    public void Retry()
     {
         player.transform.localPosition = player.transform.localPosition;
         gameOverPanel.SetActive (false);
         //キャラクターのHPなどのリセット
         player.transform.localPosition = ResetVec;
-        playerStatus.SetHp(100);
+        playerStatus.playerHP = 3;
     }
     #endregion
     

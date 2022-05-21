@@ -23,6 +23,11 @@ public class MagnetSystem : MonoBehaviour
     {
         return magType;//相手の極を判断する時に使うゲッター
     }
+    public void SetMagType(bool i)
+    {
+        magType=i;
+    }
+    
     #endregion
 
     #region 磁力の範囲に入っている間にする処理
